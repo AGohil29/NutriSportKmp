@@ -41,7 +41,11 @@ kotlin {
             implementation(libs.auth.kmp)
             implementation(libs.auth.firebase.kmp)
 
-            implementation(project(path = ":shared"))
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
+            implementation(project(":shared"))
+            implementation(project(":data"))
         }
     }
 }
