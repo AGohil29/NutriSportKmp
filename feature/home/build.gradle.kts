@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -21,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "navigation"
+            baseName = "home"
             isStatic = true
         }
     }
@@ -36,17 +35,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.compose.navigation)
-            implementation(libs.kotlinx.serialization)
 
-            implementation(project(path = ":feature:auth"))
-            implementation(project(path = ":feature:home"))
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
+            implementation(project(":shared"))
+            implementation(project(":data"))
         }
     }
 }
 
 android {
-    namespace = "com.arun.navigation"
+    namespace = "com.arun.home"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
